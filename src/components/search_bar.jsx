@@ -15,15 +15,12 @@ class SearchBar extends Component {
     this.formatValues = this.formatValues.bind(this);
   }
 
-  // here call the action to get the data? using values as search term
   submit(values) {
-    // console.log(values.search.toLowerCase().replace(" ", "+"));
-    // console.log(this);
     let searchTerm = this.formatValues(values.search);
-    // console.log(searchTerm);
 
+    // calls gifs action which updates gifs reducer which updates gif show component
     axios.get(`http://api.giphy.com/v1/gifs/search?q=${ searchTerm }&api_key=r9SoboR1Oj9PtIgZZGuUZbrtqtH5qsl5&limit=5`)
-    .then(response => console.log(response.data.data));
+    .then(response => this.setState({gifs: response.data.data}));
   }
 
   formatValues(values) {
@@ -42,7 +39,7 @@ class SearchBar extends Component {
 
 function mapStateToProps(state) {
   return( {
-    test: state.simpleReducer
+    test: state.simpleReducer,
   })
 }
 
