@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
-import simpleReducer from './simpleReducer';
+import gifsList from './gifReducer';
 
 export default combineReducers({
- simpleReducer,
- form: formReducer
+ form: formReducer,
+ gifsList: gifsList
 });

@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { simpleAction } from '../actions/simpleAction'
+import { updateGifsList } from '../actions/update_gif_list'
 
 import SearchForm from './search_form';
 
@@ -20,7 +20,8 @@ class SearchBar extends Component {
 
     // calls gifs action which updates gifs reducer which updates gif show component
     axios.get(`http://api.giphy.com/v1/gifs/search?q=${ searchTerm }&api_key=r9SoboR1Oj9PtIgZZGuUZbrtqtH5qsl5&limit=5`)
-    .then(response => this.setState({gifs: response.data.data}));
+    // .then(response => this.setState({gifs: response.data.data}));
+    .then(response => this.props.updateGifsList(response.data.data));
   }
 
   formatValues(values) {
@@ -45,8 +46,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    action: simpleAction
+    updateGifsList
   }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
+// export default connect(mapStateToProps)(SearchBar);
